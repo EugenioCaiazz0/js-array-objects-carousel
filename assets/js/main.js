@@ -1,4 +1,4 @@
-const images = [
+const carousel = [
     {
         url: 'http://www.viaggiareonline.it/wp-content/uploads/2014/11/sweden_148857365.jpg',
         title: 'Svezia',
@@ -28,3 +28,42 @@ const images = [
     },
 ];
 
+const carouselImgs = document.getElementsByClassName(`my-carousel-images`);
+let indexImg = 0;
+activateCarousel();
+
+function activateCarousel () {
+    carouselImgs.innerHTML += 
+    `<div class="my-carousel-item active">
+        <img class="img-fluid" src="${carousel[indexImg].url}" alt="${carousel[indexImg].title} picture">
+        <div class="item-description px-3">
+            <h2>${carousel[indexImg].title}</h2>
+            <p>${carousel[indexImg].description}</p>
+        </div>
+     </div>`
+     console.log(`Slide attiva: ${carousel[indexImg].title}`);
+     console.log(carousel[indexImg]);
+}
+
+
+const nxtBtn = document.getElementById(`nxtBtn`);
+nxtBtn.addEventListener(`click`, function()
+{
+    indexImg ++;
+    if (indexImg > carousel.length) 
+        {
+         indexImg = 0;
+        }
+    console.log(`Siamo a pagina ${indexImg}`);    
+})
+
+const prvsBtn = document.getElementById(`prvsBtn`);
+prvsBtn.addEventListener(`click`, function()
+{
+    indexImg --;
+    if (indexImg < 0) 
+        {
+         indexImg = carousel.length;
+        }
+    console.log(`Siamo a pagina ${indexImg}`);  
+})
