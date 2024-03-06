@@ -28,9 +28,12 @@ const carousel = [
     },
 ];
 
-const carouselImgs = document.getElementsByClassName(`my-carousel-images`);
+const carouselImgs = document.querySelector(`.my-carousel-images`);
+console.log(carouselImgs);
+
 let indexImg = 0;
 
+/* TUTTA STA ROBA NON SERVIVA
 const carouselUrls = carousel.map( destination => {
     const urlElement = destination.url;
     })
@@ -41,12 +44,12 @@ const carouselTitles = carousel.map(destination => {
 
 const carouselDescription = carousel.map(destination => {
     const descriptionElement = destination.description;
-})
+})*/
 
 
 activateCarousel();
 
-/*
+
 function activateCarousel () {
     carouselImgs.innerHTML += 
     `<div class="my-carousel-item active">
@@ -59,8 +62,12 @@ function activateCarousel () {
      console.log(`Slide attiva: ${carousel[indexImg].title}`);
      console.log(carousel[indexImg]);
 }
-*/
 
+function deactivateCarousel() {
+    carouselImgs.innerHTML = ` `;
+}
+
+/* NON SERVIVA E NON FUNZIONA NEANCHE 
 function activateCarousel () {
     carouselImgs.innerHTML += 
     `<div class="my-carousel-item active">
@@ -69,15 +76,17 @@ function activateCarousel () {
             <h2>${carouselTitles[indexImg]}</h2>
             <p>${carouselDescription[indexImg]}</p>
         </div>
-     </div>`
+     </div>`;
+     
      console.log(`Slide attiva: ${carouselTitles[indexImg]}`);
      console.log(carousel[indexImg]);
-}
+} */
 
 const nxtBtn = document.getElementById(`nxtBtn`);
 nxtBtn.addEventListener(`click`, () => {
+        deactivateCarousel();
         indexImg++;
-        if (indexImg > carousel.length) {
+        if (indexImg > carousel.length-1) {
             indexImg = 0;
         }
         activateCarousel();
@@ -86,9 +95,10 @@ nxtBtn.addEventListener(`click`, () => {
 
 const prvsBtn = document.getElementById(`prvsBtn`);
 prvsBtn.addEventListener(`click`, () => {
+        deactivateCarousel();
         indexImg--;
         if (indexImg < 0) {
-            indexImg = carousel.length;
+            indexImg = carousel.length-1;
         }
         activateCarousel();
         console.log(`Siamo a pagina ${indexImg}`);
