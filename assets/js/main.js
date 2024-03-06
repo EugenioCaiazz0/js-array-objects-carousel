@@ -30,8 +30,23 @@ const carousel = [
 
 const carouselImgs = document.getElementsByClassName(`my-carousel-images`);
 let indexImg = 0;
+
+const carouselUrls = carousel.map( destination => {
+    const urlElement = destination.url;
+    })
+
+const carouselTitles = carousel.map(destination => {
+    const titleElement = destination.title;
+})
+
+const carouselDescription = carousel.map(destination => {
+    const descriptionElement = destination.description;
+})
+
+
 activateCarousel();
 
+/*
 function activateCarousel () {
     carouselImgs.innerHTML += 
     `<div class="my-carousel-item active">
@@ -44,26 +59,37 @@ function activateCarousel () {
      console.log(`Slide attiva: ${carousel[indexImg].title}`);
      console.log(carousel[indexImg]);
 }
+*/
 
+function activateCarousel () {
+    carouselImgs.innerHTML += 
+    `<div class="my-carousel-item active">
+        <img class="img-fluid" src="${carouselUrls[indexImg]}" alt="${carouselTitles[indexImg]} picture">
+        <div class="item-description px-3">
+            <h2>${carouselTitles[indexImg]}</h2>
+            <p>${carouselDescription[indexImg]}</p>
+        </div>
+     </div>`
+     console.log(`Slide attiva: ${carouselTitles[indexImg]}`);
+     console.log(carousel[indexImg]);
+}
 
 const nxtBtn = document.getElementById(`nxtBtn`);
-nxtBtn.addEventListener(`click`, function()
-{
-    indexImg ++;
-    if (indexImg > carousel.length) 
-        {
-         indexImg = 0;
+nxtBtn.addEventListener(`click`, () => {
+        indexImg++;
+        if (indexImg > carousel.length) {
+            indexImg = 0;
         }
-    console.log(`Siamo a pagina ${indexImg}`);    
-})
+        activateCarousel();
+        console.log(`Siamo a pagina ${indexImg}`);
+    })
 
 const prvsBtn = document.getElementById(`prvsBtn`);
-prvsBtn.addEventListener(`click`, function()
-{
-    indexImg --;
-    if (indexImg < 0) 
-        {
-         indexImg = carousel.length;
+prvsBtn.addEventListener(`click`, () => {
+        indexImg--;
+        if (indexImg < 0) {
+            indexImg = carousel.length;
         }
-    console.log(`Siamo a pagina ${indexImg}`);  
-})
+        activateCarousel();
+        console.log(`Siamo a pagina ${indexImg}`);
+    })
